@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-server
+spec:
+  ports:
+  - port: 443
+    targetPort: 443
+    protocol: TCP
+    name: http
+  selector:
+    app: echo-server
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: echo-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: echo-server
+    spec:
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: echo-tls
+      containers:
+      - name: nginx
+        image: pbrumblay/tls-sidecar
+        ports:
+        - containerPort: 443
+        volumeMounts:
+        - mountPath: /etc/nginx/ssl
+          name: secret-volume
+      - name: echo-server
+        image: pbrumblay/echo-server
+        ports:
+        - containerPort: 8080
