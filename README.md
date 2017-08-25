@@ -1,7 +1,7 @@
 # tls-sidecar
 TLS/SSL sidecar for terminating HTTPS w/i k8s clusters
 
-You can use this repository to demo a sidecar which can terminate TLS connections. 
+You can use this repository to demo a sidecar which can terminate TLS connections. This demo makes use of the kubernetes service type of type LoadBalancer, so it assumes that your cluster supports the automatic creation of load balancers. 
 
 To use:
 ```
@@ -21,7 +21,7 @@ kubectl apply -f tls-sidecar/kubernetes/deployment.yaml
 ```
 
 ```
-# Test it out. If you're on GKE first get the IP of your new service
+# Test it out. 
 kubectl get svc echo-server
 NAME          CLUSTER-IP     EXTERNAL-IP      PORT(S)         AGE
 echo-server   10.3.250.228   <REDACTED>   443:31619/TCP   10m
