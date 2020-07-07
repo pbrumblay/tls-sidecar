@@ -30,4 +30,4 @@ echo-server   10.3.250.228   <REDACTED>   443:31619/TCP   10m
 curl -k https://<REDACTED>/lorem
 ```
 
-Note that we're using curl's "-k" switch to disable certification validation. You'll want to use a real certificate for real-world use cases.
+Note that we're using curl's "-k" switch to disable certificate validation. You'll want to use a real certificate for real-world use cases.
